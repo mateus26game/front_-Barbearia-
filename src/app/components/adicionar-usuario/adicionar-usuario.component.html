@@ -1,0 +1,34 @@
+<div class="d-flex flex-wrap justify-content-center align-items-center mt-5" style="min-height: 10vh;">
+  <form class="form-signin p-4 border rounded shadow bg-white">
+    <div class="container">
+      <h2 class="mb-4 text-center">Adicionar Cliente</h2>
+      <form (ngSubmit)="adicionarUsuario()">
+        <div class="d-flex flex-wrap justify-content-center">
+          <div class="mb-3 me-3">
+            <label for="nome" class="form-label">Nome:</label>
+            <input type="text" class="form-control" id="nome" [(ngModel)]="usuario.nome" name="nome" required>
+          </div>
+
+          <div class="mb-3 me-3">
+            <label for="diaTrabalho" class="form-label">Dia de Trabalho:</label>
+            <input type="date" class="form-control" id="diaTrabalho" [(ngModel)]="usuario.diaTrabalho" name="diaTrabalho" required>
+          </div>
+
+          <div class="mb-3 me-3">
+            <label for="inicioTrabalho" class="form-label">Início do Serviço:</label>
+            <input type="time" class="form-control" id="inicioTrabalho" [(ngModel)]="usuario.inicioTrabalho" name="inicioTrabalho" required>
+          </div>
+
+          <div class="mb-3 me-3">
+            <label for="fimExpediente" class="form-label">Fim do Serviço:</label>
+            <input type="time" class="form-control" id="fimExpediente" [(ngModel)]="usuario.fimExpediente" name="fimExpediente" required>
+          </div>
+        </div>
+
+        <div class="text-center mt-4">
+          <button type="submit" class="btn btn-primary px-4" (click)="listarUsuarios()">Adicionar</button>
+        </div>
+      </form>
+    </div>
+  </form>
+</div>

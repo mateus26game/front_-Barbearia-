@@ -1,0 +1,26 @@
+<app-header></app-header>
+
+<app-adicionar-usuario></app-adicionar-usuario>
+
+<ng-template #semUsuarios>
+  <p>Nenhum cliente encontrado.</p>
+</ng-template>
+
+<div *ngIf="usuarios.length > 0; else semUsuarios" class="row mt-5"> 
+  <div *ngFor="let usuario of usuarios" class="col-md-4 mb-3">
+    <div class="card h-100 rounded shadow">
+      <div class="card-body">
+        <h5 class="card-title">Cliente: {{ usuario.nome }}</h5>
+        <p class="card-text">
+          <strong>Data do Agendamento:</strong> {{ usuario.diaTrabalho }} <br>
+          <strong>Horário:</strong> {{ usuario.inicioTrabalho }} <br>
+          <strong>Serviço:</strong> {{ usuario.fimExpediente }}
+        </p>
+        <div class="d-flex justify-content-between">
+          <button type="button" class="btn btn-danger" (click)="excluirUsuario(usuario.id)">Cancelar</button>
+          <button type="button" class="btn btn-primary" (click)="excluirUsuario(usuario.id)">Editar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
