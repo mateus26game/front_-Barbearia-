@@ -1,5 +1,16 @@
+
+
+<div class="d-flex flex-column justify-content-center align-items-center vh-50 text-center">
+  <div class="linha-preta"></div>
+  
+  <h1 class="text-dark custom-title">A MELHOR BARBEARIA PARA O SEU ESTILO!</h1>
+  
+</div>
+
+
+
 <div class="d-flex flex-wrap justify-content-center align-items-center mt-5" style="min-height: 10vh;">
-  <form class="form-signin p-4 border rounded shadow bg-white">
+  <form class="form-signin p-4  shadow bg-white">
     <div class="container">
       <h2 class="mb-4 text-center">Adicionar Cliente</h2>
       <form (ngSubmit)="adicionarUsuario()">
@@ -19,14 +30,11 @@
             <input type="time" class="form-control" id="inicioTrabalho" [(ngModel)]="usuario.inicioTrabalho" name="inicioTrabalho" required>
           </div>
 
-          <div class="mb-3 me-3">
-            <label for="fimExpediente" class="form-label">Fim do Serviço:</label>
-            <input type="time" class="form-control" id="fimExpediente" [(ngModel)]="usuario.fimExpediente" name="fimExpediente" required>
-          </div>
+          
         </div>
 
         <div class="text-center mt-4">
-          <button type="submit" class="btn btn-primary px-4" (click)="listarUsuarios()">Adicionar</button>
+          <button type="submit"  class="btn btn-black custom-btn mt-3" (click)="listarUsuarios()">Adicionar</button>
         </div>
       </form>
     </div>

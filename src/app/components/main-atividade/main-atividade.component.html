@@ -1,26 +1,37 @@
-<app-header></app-header>
+<div class="footer-message">
+  <p>.</p>
+  </div>
+  
+
 
 <app-adicionar-usuario></app-adicionar-usuario>
 
-<ng-template #semUsuarios>
-  <p>Nenhum cliente encontrado.</p>
-</ng-template>
 
-<div *ngIf="usuarios.length > 0; else semUsuarios" class="row mt-5"> 
-  <div *ngFor="let usuario of usuarios" class="col-md-4 mb-3">
-    <div class="card h-100 rounded shadow">
-      <div class="card-body">
-        <h5 class="card-title">Cliente: {{ usuario.nome }}</h5>
-        <p class="card-text">
-          <strong>Data do Agendamento:</strong> {{ usuario.diaTrabalho }} <br>
-          <strong>Horário:</strong> {{ usuario.inicioTrabalho }} <br>
-          <strong>Serviço:</strong> {{ usuario.fimExpediente }}
-        </p>
-        <div class="d-flex justify-content-between">
-          <button type="button" class="btn btn-danger" (click)="excluirUsuario(usuario.id)">Cancelar</button>
-          <button type="button" class="btn btn-primary" (click)="excluirUsuario(usuario.id)">Editar</button>
-        </div>
-      </div>
-    </div>
-  </div>
+<ng-template #semUsuarios>
+  <p class="text-center mt-3">Nenhum cliente encontrado.</p>
+</ng-template>
+<form class="container">
+<div *ngIf="usuarios.length > 0; else semUsuarios" class="table-responsive mt-4">
+  <table class="table table-striped table-bordered text-center">
+    <thead class="table-dark">
+      <tr>
+        <th>Cliente</th>
+        <th>Data do Agendamento</th>
+        <th>Horário</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuarios">
+        <td>{{ usuario.nome }}</td>
+        <td>{{ usuario.diaTrabalho }}</td>
+        <td>{{ usuario.inicioTrabalho }}</td>
+        <td>
+          <button class="btn btn-danger btn-sm me-2" (click)="excluirUsuario(usuario.id)">Cancelar</button>
+          <button class="btn btn-primary btn-sm">Editar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
+</form>

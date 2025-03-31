@@ -1,0 +1,18 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 50vh; /* Garante que a página ocupe toda a altura da tela */
+}
+
+.content-wrapper {
+  flex: 1; /* Ocupa o espaço disponível, empurrando o rodapé para baixo */
+}
+
+.footer {
+  background-color: #343a40;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: auto; /* Mantém o rodapé sempre no fim */
+  width: 100%; /* Garante que o rodapé ocupe toda a largura */
+}

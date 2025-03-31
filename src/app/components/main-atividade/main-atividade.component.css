@@ -1,4 +1,16 @@
-.espaco-entre-secoes {
-    margin-top: 50px; /* Ajuste conforme necessário */
-  }
-  
+.table th, .table td {
+  vertical-align: middle;
+}
+
+.table th {
+  text-transform: uppercase;
+}
+
+.btn-sm {
+  padding: 5px 10px;
+  font-size: 14px;
+}
+ 
+.footer-message{
+  color: #ffc107;
+}
