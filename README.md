@@ -1,59 +1,54 @@
-# ProjetoFront
+# ✅ Gerenciamento de Agendamentos - Barbearia
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.5.
+Este é um projeto front-end desenvolvido como parte do **Desafio DIO**, onde foi criado um sistema de gerenciamento de agendamentos para uma barbearia. O projeto foi construído utilizando **Angular** para a estrutura e **Bootstrap** para o design responsivo e moderno.
 
-## Development server
+## ✨ Tecnologias Utilizadas
 
-To start a local development server, run:
+- **Angular**: Framework front-end para a criação de aplicações web dinâmicas.
+- **Bootstrap**: Biblioteca CSS para estilização responsiva e componentes prontos.
+- **TypeScript**: Linguagem utilizada no desenvolvimento com Angular.
+- **HTML5 e CSS3**: Estrutura e estilização da interface.
+- **Git e GitHub**: Controle de versão e hospedagem do código-fonte.
 
-```bash
-ng serve
-```
+## 🌟 Funcionalidades
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- Interface amigável e responsiva para gestão de agendamentos.
+- Listagem de horários disponíveis para cortes.
+- Possibilidade de marcar, editar e cancelar agendamentos.
+- Integração com back-end (caso implementado futuramente).
 
-## Code scaffolding
+## 🛠️ Como Executar o Projeto
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Certifique-se de ter o **Node.js** instalado para rodar o Angular.
 
-```bash
-ng generate component component-name
-```
+1. Clone este repositório:
+   ```sh
+   git clone https://github.com/seu-usuario/seu-repositorio.git
+   ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+2. Acesse a pasta do projeto:
+   ```sh
+   cd projetoFront
+   ```
 
-```bash
-ng generate --help
-```
+3. Instale as dependências:
+   ```sh
+   npm install
+   ```
 
-## Building
+4. Execute o projeto:
+   ```sh
+   ng serve
+   ```
 
-To build the project run:
+5. Acesse no navegador: `http://localhost:4200`
 
-```bash
-ng build
-```
+## 🌟 Melhorias Futuras
+- Integração com API para persistência de dados.
+- Implementação de autenticação de usuários.
+- Novas funcionalidades como escolha de barbeiros e serviços adicionais.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
 
-## Running unit tests
+Desenvolvido com ❤️ como parte do **Desafio DIO**.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
