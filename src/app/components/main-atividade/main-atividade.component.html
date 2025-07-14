@@ -7,31 +7,3 @@
 <app-adicionar-usuario></app-adicionar-usuario>
 
 
-<ng-template #semUsuarios>
-  <p class="text-center mt-3">Nenhum cliente encontrado.</p>
-</ng-template>
-<form class="container">
-<div *ngIf="usuarios.length > 0; else semUsuarios" class="table-responsive mt-4">
-  <table class="table table-striped table-bordered text-center">
-    <thead class="table-dark">
-      <tr>
-        <th>Cliente</th>
-        <th>Data do Agendamento</th>
-        <th>Horário</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let usuario of usuarios">
-        <td>{{ usuario.nome }}</td>
-        <td>{{ usuario.diaTrabalho }}</td>
-        <td>{{ usuario.inicioTrabalho }}</td>
-        <td>
-          <button class="btn btn-danger btn-sm me-2" (click)="excluirUsuario(usuario.id)">Cancelar</button>
-          <button class="btn btn-primary btn-sm">Editar</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-</form>

@@ -1,42 +1,105 @@
-
-
 <div class="d-flex flex-column justify-content-center align-items-center vh-50 text-center">
   <div class="linha-preta"></div>
-  
   <h1 class="text-dark custom-title">A MELHOR BARBEARIA PARA O SEU ESTILO!</h1>
-  
 </div>
 
-
-
 <div class="d-flex flex-wrap justify-content-center align-items-center mt-5" style="min-height: 10vh;">
-  <form class="form-signin p-4  shadow bg-white">
+  <form class="form-signin p-4 shadow bg-white" (ngSubmit)="adicionarOuAtualizarUsuario()">
     <div class="container">
-      <h2 class="mb-4 text-center">Adicionar Cliente</h2>
-      <form (ngSubmit)="adicionarUsuario()">
-        <div class="d-flex flex-wrap justify-content-center">
-          <div class="mb-3 me-3">
-            <label for="nome" class="form-label">Nome:</label>
-            <input type="text" class="form-control" id="nome" [(ngModel)]="usuario.nome" name="nome" required>
-          </div>
+      <h2 class="mb-4 text-center">{{ usuarioSelecionadoId ? 'Editar Cliente' : 'Adicionar Cliente' }}</h2>
 
-          <div class="mb-3 me-3">
-            <label for="diaTrabalho" class="form-label">Dia de Trabalho:</label>
-            <input type="date" class="form-control" id="diaTrabalho" [(ngModel)]="usuario.diaTrabalho" name="diaTrabalho" required>
-          </div>
-
-          <div class="mb-3 me-3">
-            <label for="inicioTrabalho" class="form-label">Início do Serviço:</label>
-            <input type="time" class="form-control" id="inicioTrabalho" [(ngModel)]="usuario.inicioTrabalho" name="inicioTrabalho" required>
-          </div>
-
-          
+      <div class="d-flex flex-wrap justify-content-center">
+        <div class="mb-3 me-3">
+          <label for="nome" class="form-label">Nome:</label>
+          <input type="text" id="nome" class="form-control" [(ngModel)]="usuario.nome" name="nome" required />
         </div>
 
-        <div class="text-center mt-4">
-          <button type="submit"  class="btn btn-black custom-btn mt-3" (click)="listarUsuarios()">Adicionar</button>
+        <div class="mb-3 me-3">
+          <label for="diaParaCorte" class="form-label">Data do Corte:</label>
+          <input type="date" id="diaParaCorte" class="form-control" [(ngModel)]="usuario.diaParaCorte" name="diaParaCorte" required />
         </div>
-      </form>
+
+        <div class="mb-3 me-3">
+          <label for="inicioDoCorte" class="form-label">Início do Serviço:</label>
+          <input type="time" id="inicioDoCorte" class="form-control" [(ngModel)]="usuario.inicioDoCorte" name="inicioDoCorte" required />
+        </div>
+
+        <div class="mb-3 me-3">
+          <label for="tipoServico" class="form-label">Tipo de Serviço:</label>
+          <select id="tipoServico" class="form-select" [(ngModel)]="usuario.tipoServico" name="tipoServico" required>
+            <option value="" disabled>Selecione</option>
+            <option value="CABELO">Cabelo</option>
+            <option value="BARBA">Barba</option>
+            <option value="CABELO_E_BARBA">Cabelo e Barba</option>
+          </select>
+        </div>
+
+        <div class="mb-3 me-3">
+          <label for="statusServico" class="form-label">Status do Serviço:</label>
+          <select id="statusServico" class="form-select" [(ngModel)]="usuario.statusServico" name="statusServico" required>
+            <option value="" disabled>Selecione</option>
+            <option value="ESPERADO">Esperado</option>
+            <option value="FINALIZADO">Finalizado</option>
+          </select>
+        </div>
+
+        <div class="mb-3 me-3">
+          <label for="statusPagamento" class="form-label">Status do Pagamento:</label>
+          <select id="statusPagamento" class="form-select" [(ngModel)]="usuario.statusPagamento" name="statusPagamento" required>
+            <option value="" disabled>Selecione</option>
+            <option value="PAGO">Pago</option>
+            <option value="NAO_PAGO">Não Pago</option>
+          </select>
+        </div>
+
+        <div class="mb-3 me-3">
+          <label for="precoBarbearia" class="form-label">Preço:</label>
+          <input type="number" id="precoBarbearia" class="form-control" [(ngModel)]="usuario.precoBarbearia" name="precoBarbearia" min="0" step="0.01" required />
+        </div>
+      </div>
+
+      <div class="text-center mt-4">
+        <button type="submit" class="btn btn-black custom-btn mt-3">
+          {{ usuarioSelecionadoId ? 'Atualizar' : 'Adicionar' }}
+        </button>
+        <button type="button" class="btn btn-secondary mt-3 ms-2" (click)="limparFormulario()">Limpar Formulario</button>
+      </div>
     </div>
   </form>
+</div>
+
+<ng-template #semUsuarios>
+  <p class="text-center mt-3">Nenhum cliente encontrado.</p>
+</ng-template>
+
+<div *ngIf="usuarios.length > 0; else semUsuarios" class="table-responsive mt-4 container">
+  <table class="table table-striped table-bordered text-center">
+    <thead class="table-dark">
+      <tr>
+        <th>Cliente</th>
+        <th>Data do Corte</th>
+        <th>Horário</th>
+        <th>Tipo Serviço</th>
+        <th>Status Serviço</th>
+        <th>Status Pagamento</th>
+        <th>Preço</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuarios">
+        <td>{{ usuario.nome }}</td>
+        <td>{{ usuario.diaParaCorte }}</td>
+        <td>{{ usuario.inicioDoCorte }}</td>
+        <td>{{ usuario.tipoServico }}</td>
+        <td>{{ usuario.statusServico }}</td>
+        <td>{{ usuario.statusPagamento }}</td>
+        <td>{{ usuario.precoBarbearia | currency:'BRL' }}</td>
+        <td>
+          <button class="btn btn-danger btn-sm me-2" (click)="excluirUsuario(usuario.id)">Cancelar</button>
+          <button class="btn btn-primary btn-sm" (click)="editarUsuario(usuario)">Editar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

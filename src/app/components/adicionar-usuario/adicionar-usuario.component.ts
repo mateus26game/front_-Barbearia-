@@ -1,53 +1,110 @@
-
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../../services/usuario.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-adicionar-usuario',
-  standalone: false,
   templateUrl: './adicionar-usuario.component.html',
-  styleUrls: ['./adicionar-usuario.component.css']
+  styleUrls: ['./adicionar-usuario.component.css'],
+  standalone:false
 })
-export class AdicionarUsuarioComponent {
+export class AdicionarUsuarioComponent implements OnInit {
+
   usuario = {
     nome: '',
-    diaTrabalho: '',
-    inicioTrabalho: '',
-    fimExpediente: ''
+    diaParaCorte: '',
+    inicioDoCorte: '',
+    tipoServico: '',
+    statusServico: '',
+    statusPagamento: '',
+    precoBarbearia: null
   };
+
+  usuarios: any[] = [];
+  usuarioSelecionadoId: number | null = null;
 
   constructor(private usuarioService: UsuarioService) { }
 
-  usuarios: any[] = []; 
+  ngOnInit(): void {
+    this.listarUsuarios();
+  }
 
-  adicionarUsuario() {
-    // Adicionando ":00" aos campos de horário, caso não tenha sido incluído
-    this.usuario.inicioTrabalho = this.usuario.inicioTrabalho + ':00';
-    this.usuario.fimExpediente = this.usuario.fimExpediente + ':00';
-  
-    this.usuarioService.adicionarUsuario(this.usuario).subscribe(response => {
-      console.log('Usuário adicionado com sucesso!', response);
-    }, error => {
-      console.error('Erro ao adicionar usuário', error);
-      alert('Erro ao adicionar usuário!');
+  listarUsuarios(): void {
+    this.usuarioService.listarUsuarios().subscribe(data => {
+      this.usuarios = data;
     });
   }
 
-  
- listarUsuarios(){
-  
-  this.usuarioService.listarUsuarios().subscribe(
-    (response) => {
-      this.usuarios = response;  
-      console.log('Usuários:', this.usuarios);
-    },
-    (error) => {
-      console.error('Erro ao listar usuários:', error);
-      alert('Erro ao listar usuários!');
+  adicionarOuAtualizarUsuario(): void {
+    // Ajusta o horário para ter segundos, se necessário
+    if (this.usuario.inicioDoCorte && this.usuario.inicioDoCorte.length === 5) {
+      this.usuario.inicioDoCorte += ':00';
     }
-  );
- }
-  
+
+    if (this.usuarioSelecionadoId) {
+      // Atualizar cliente existente
+      this.usuarioService.atualizarUsuario(this.usuarioSelecionadoId.toString(), this.usuario)
+        .subscribe(() => {
+          Swal.fire('Sucesso!', 'Cliente atualizado com sucesso!', 'success');
+          this.limparFormulario();
+          this.listarUsuarios();
+        });
+    } else {
+      // Adicionar novo cliente
+      this.usuarioService.adicionarUsuario(this.usuario)
+        .subscribe(() => {
+          Swal.fire('Sucesso!', 'Cliente adicionado com sucesso!', 'success');
+          this.limparFormulario();
+          this.listarUsuarios();
+        });
+    }
+  }
+
+  editarUsuario(usuario: any): void {
+    this.usuario = { ...usuario };
+    // Ajustar para remover os segundos ao preencher o input time (se tiver)
+    if (this.usuario.inicioDoCorte && this.usuario.inicioDoCorte.length > 5) {
+      this.usuario.inicioDoCorte = this.usuario.inicioDoCorte.substring(0, 5);
+    }
+    this.usuarioSelecionadoId = usuario.id;
+  }
+
+  excluirUsuario(id: string): void {
+    Swal.fire({
+      title: 'Tem certeza?',
+      text: 'Você quer realmente excluir este cliente?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, excluir!',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.usuarioService.excluirUsuario(id).subscribe(() => {
+          Swal.fire(
+            'Excluído!',
+            'Cliente excluído com sucesso.',
+            'success'
+          );
+          this.listarUsuarios();
+          if (this.usuarioSelecionadoId === +id) {
+            this.limparFormulario();
+          }
+        });
+      }
+    });
+  }
+
+  limparFormulario(): void {
+    this.usuario = {
+      nome: '',
+      diaParaCorte: '',
+      inicioDoCorte: '',
+      tipoServico: '',
+      statusServico: '',
+      statusPagamento: '',
+      precoBarbearia: null
+    };
+    this.usuarioSelecionadoId = null;
+  }
 }
-
-
