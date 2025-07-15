@@ -19,6 +19,10 @@ private apiUrl = 'http://localhost:8080/api/barbearias';
     return this.http.get<any[]>(`${this.apiUrl}/listar`);
   }
 
+  CortedoDia(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/cortes-hoje`);
+  }
+
   excluirUsuario(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/deletar/${id}`);
   }
@@ -48,5 +52,10 @@ gerarTodasNotaFiscal(): Observable<Blob> {
   });
 }
 
+corteshojepdf(): Observable<Blob> {
+  return this.http.get(`${this.apiUrl}/cortes-hojepdf`, {
+    responseType: 'blob'
+  });
+}
 
 }

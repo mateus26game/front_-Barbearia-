@@ -1,0 +1,18 @@
+
+  .custom-btn {
+    font-weight: bold;
+    background-color: black; /* Fundo preto */
+    color: yellow; /* Texto amarelo */
+    border: none; /* Remove borda */
+    padding: 10px 20px; /* Ajusta tamanho */
+    font-size: 18px; /* Deixa o texto maior */
+    border-radius: 5px; /* Arredonda os cantos */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* Adiciona sombra */
+    transition: all 0.3s ease-in-out; /* Efeito suave ao passar o mouse */
+  }
+  
+  .custom-btn:hover {
+    background-color: #222; /* Preto um pouco mais claro ao passar o mouse */
+    color: gold; /* Texto dourado no hover */
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.7); /* Aumenta a sombra */
+  }
