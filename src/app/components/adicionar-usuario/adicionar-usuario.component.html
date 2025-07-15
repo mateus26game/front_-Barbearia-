@@ -90,7 +90,7 @@
       <tr *ngFor="let usuario of usuarios">
         <td>{{ usuario.nome }}</td>
         <td>{{ usuario.diaParaCorte }}</td>
-        <td>{{ usuario.inicioDoCorte }}</td>
+        <td>{{ formatarHorario(usuario.inicioDoCorte) }}</td>
         <td>{{ usuario.tipoServico }}</td>
         <td>{{ usuario.statusServico }}</td>
         <td>{{ usuario.statusPagamento }}</td>

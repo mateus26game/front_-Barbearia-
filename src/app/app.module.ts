@@ -12,6 +12,8 @@ import { IndexComponent } from './page/home/index.component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { TelaFiltroComponent } from './page/tela-filtro/tela-filtro.component';
+import { DashboardComponent } from './page/dashboard/dashboard.component';
+import { CorteDoDiaComponent } from './page/corte-do-dia/corte-do-dia.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { TelaFiltroComponent } from './page/tela-filtro/tela-filtro.component';
     HeaderComponent,
     FooterComponent,
     IndexComponent,
-    TelaFiltroComponent
+    TelaFiltroComponent,
+    DashboardComponent,
+    CorteDoDiaComponent
   ],
   imports: [
     BrowserModule,

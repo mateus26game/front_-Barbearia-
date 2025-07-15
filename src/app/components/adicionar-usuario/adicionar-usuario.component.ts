@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
   selector: 'app-adicionar-usuario',
   templateUrl: './adicionar-usuario.component.html',
   styleUrls: ['./adicionar-usuario.component.css'],
-  standalone:false
+  standalone: false
 })
 export class AdicionarUsuarioComponent implements OnInit {
 
@@ -35,14 +35,19 @@ export class AdicionarUsuarioComponent implements OnInit {
     });
   }
 
+  // Função para extrair só o "HH:mm" do OffsetTime (ex: "10:30:00-03:00" -> "10:30")
+  formatarHorario(horarioComOffset: string): string {
+    if (!horarioComOffset) return '';
+    return horarioComOffset.split('-')[0].substring(0, 5);
+  }
+
   adicionarOuAtualizarUsuario(): void {
-    // Ajusta o horário para ter segundos, se necessário
+    // Adiciona ":00-03:00" ao horário para enviar o formato OffsetTime esperado no backend
     if (this.usuario.inicioDoCorte && this.usuario.inicioDoCorte.length === 5) {
-      this.usuario.inicioDoCorte += ':00';
+      this.usuario.inicioDoCorte = this.usuario.inicioDoCorte + ':00-03:00';
     }
 
     if (this.usuarioSelecionadoId) {
-      // Atualizar cliente existente
       this.usuarioService.atualizarUsuario(this.usuarioSelecionadoId.toString(), this.usuario)
         .subscribe(() => {
           Swal.fire('Sucesso!', 'Cliente atualizado com sucesso!', 'success');
@@ -50,7 +55,6 @@ export class AdicionarUsuarioComponent implements OnInit {
           this.listarUsuarios();
         });
     } else {
-      // Adicionar novo cliente
       this.usuarioService.adicionarUsuario(this.usuario)
         .subscribe(() => {
           Swal.fire('Sucesso!', 'Cliente adicionado com sucesso!', 'success');
@@ -62,9 +66,9 @@ export class AdicionarUsuarioComponent implements OnInit {
 
   editarUsuario(usuario: any): void {
     this.usuario = { ...usuario };
-    // Ajustar para remover os segundos ao preencher o input time (se tiver)
-    if (this.usuario.inicioDoCorte && this.usuario.inicioDoCorte.length > 5) {
-      this.usuario.inicioDoCorte = this.usuario.inicioDoCorte.substring(0, 5);
+    // Remove offset para preencher o input time com "HH:mm"
+    if (this.usuario.inicioDoCorte) {
+      this.usuario.inicioDoCorte = this.formatarHorario(this.usuario.inicioDoCorte);
     }
     this.usuarioSelecionadoId = usuario.id;
   }

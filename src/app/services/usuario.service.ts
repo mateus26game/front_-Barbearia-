@@ -35,4 +35,18 @@ listarPorStatusPagamento(status: string) {
   });
 }
 
+
+gerarNotaFiscal(id: number): Observable<Blob> {
+  return this.http.get(`${this.apiUrl}/nota-fiscal/${id}`, {
+    responseType: 'blob'
+  });
+}
+
+gerarTodasNotaFiscal(): Observable<Blob> {
+  return this.http.get(`${this.apiUrl}/Todas-nota-fiscal`, {
+    responseType: 'blob'
+  });
+}
+
+
 }

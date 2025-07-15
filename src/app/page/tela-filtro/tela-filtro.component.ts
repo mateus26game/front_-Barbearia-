@@ -50,4 +50,34 @@ export class TelaFiltroComponent implements OnInit {
       });
     }
   }
+
+  gerarNota(id: number): void {
+    this.usuarioService.gerarNotaFiscal(id).subscribe(pdfBlob => {
+      const url = window.URL.createObjectURL(pdfBlob);
+  
+      // Funciona tanto no mobile quanto no navegador
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `nota_fiscal_${id}.pdf`;
+      link.click();
+  
+      window.URL.revokeObjectURL(url);
+    });
+  }
+
+
+  gerarTodasNotaFiscal(): void {
+    this.usuarioService.gerarTodasNotaFiscal().subscribe(pdfBlob => {
+      const url = window.URL.createObjectURL(pdfBlob);
+  
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'todas_notas_fiscais.pdf';
+      link.click();
+  
+      window.URL.revokeObjectURL(url);
+    });
+  }
+  
+  
 }

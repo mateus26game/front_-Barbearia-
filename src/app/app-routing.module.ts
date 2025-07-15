@@ -3,10 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { IndexComponent } from './page/home/index.component';
 import { MainAtividadeComponent } from './page/tela_da_adicionar/main-atividade.component';
 import { TelaFiltroComponent } from './page/tela-filtro/tela-filtro.component';
+import { DashboardComponent } from './page/dashboard/dashboard.component';
+import { CorteDoDiaComponent } from './page/corte-do-dia/corte-do-dia.component';
 const routes: Routes = [
   { path: '', component: IndexComponent },
   { path: 'home', component: MainAtividadeComponent },
-  {path:'pagamento',component:TelaFiltroComponent}
+  {path:'pagamento',component:TelaFiltroComponent},
+  {path:'Dashboard',component:DashboardComponent},
+  {path:'cortedia',component:CorteDoDiaComponent}
 ];
 
 @NgModule({

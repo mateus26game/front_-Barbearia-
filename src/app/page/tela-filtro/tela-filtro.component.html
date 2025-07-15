@@ -29,6 +29,13 @@
               <option value="">Todos</option>
             </select>
           </div>
+
+          <div class="text-end me-4 mt-3">
+            <button class="btn btn-success" (click)="gerarTodasNotaFiscal()">
+              <i class="bi bi-download me-1"></i> Baixar Todas as Notas
+            </button>
+          </div>
+          
         </div>
       </div>
     </div>
@@ -63,19 +70,23 @@
           <td>{{ usuario.statusServico }}</td>
           <td>
             <span
-              class="badge"
               [ngClass]="{
-                'bg-success': usuario.statusPagamento === 'PAGO',
-                'bg-danger': usuario.statusPagamento === 'NAO_PAGO'
+                'text-success fw-bold': usuario.statusPagamento === 'PAGO',
+                'text-danger fw-bold': usuario.statusPagamento === 'NAO_PAGO'
               }"
             >
-              {{ usuario.statusPagamento }}
+              {{ usuario.statusPagamento === 'PAGO' ? 'Pagou' : 'Não Pagou' }}
             </span>
           </td>
+          
           <td>{{ usuario.precoBarbearia | currency: 'BRL' }}</td>
           <td>
-            <button class="btn btn-outline-primary btn-sm">Gerar Nota</button>
-          </td>
+            <button
+              class="btn btn-outline-primary btn-sm"
+              (click)="gerarNota(usuario.id)">
+              Gerar Nota
+            </button>
+          </td>          
         </tr>
       </tbody>
     </table>
