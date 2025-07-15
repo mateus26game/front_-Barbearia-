@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -25,6 +25,14 @@ private apiUrl = 'http://localhost:8080/api/barbearias';
 
   atualizarUsuario(id: string, usuario: any): Observable<any> {
   return this.http.put<any>(`${this.apiUrl}/atualizar/${id}`, usuario);
+}
+
+
+
+listarPorStatusPagamento(status: string) {
+  return this.http.get<any[]>(`${this.apiUrl}/filtrar`, {
+    params: { statusPagamento: status }
+  });
 }
 
 }

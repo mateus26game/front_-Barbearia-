@@ -5,12 +5,13 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AdicionarUsuarioComponent } from './components/adicionar-usuario/adicionar-usuario.component';
-import { MainAtividadeComponent } from './components/main-atividade/main-atividade.component';
+import { MainAtividadeComponent } from './page/tela_da_adicionar/main-atividade.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { IndexComponent } from './components/index/index.component';
+import { IndexComponent } from './page/home/index.component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
+import { TelaFiltroComponent } from './page/tela-filtro/tela-filtro.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AppRoutingModule } from './app-routing.module';
     MainAtividadeComponent,
     HeaderComponent,
     FooterComponent,
-    IndexComponent
+    IndexComponent,
+    TelaFiltroComponent
   ],
   imports: [
     BrowserModule,

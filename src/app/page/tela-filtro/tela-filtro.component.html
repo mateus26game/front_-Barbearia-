@@ -1,0 +1,90 @@
+<div class="footer-message">
+    <p>.</p>
+    </div>
+    
+
+<div class="d-flex flex-column justify-content-center align-items-center vh-50 text-center">
+    <div class="linha-preta"></div>
+    <h1 class="text-dark custom-title">A MELHOR BARBEARIA PARA O SEU ESTILO!</h1>
+  </div>
+  
+  <!-- Filtro dentro de um card -->
+  <div class="container mt-4">
+    <div class="card shadow-sm border-0">
+      <div class="card-body">
+        <h5 class="card-title mb-3">
+          <i class="bi bi-funnel-fill me-2"></i>Filtro de Pagamento
+        </h5>
+        <div class="row">
+          <div class="col-md-6">
+            <label for="statusPagamento" class="form-label">Status do pagamento:</label>
+            <select
+              id="statusPagamento"
+              class="form-select"
+              [(ngModel)]="statusSelecionado"
+              (change)="buscarClientes()"
+            >
+              <option value="PAGO">Pagou</option>
+              <option value="NAO_PAGO">Não Pagou</option>
+              <option value="">Todos</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Mensagem com número de resultados -->
+  <div *ngIf="usuarios.length > 0" class="text-center mt-4">
+    <span class="badge bg-success fs-6">{{ usuarios.length }} cliente(s) encontrado(s)</span>
+  </div>
+  
+  <!-- Tabela de usuários -->
+  <div *ngIf="usuarios.length > 0; else semUsuarios" class="table-responsive mt-4 container">
+    <table class="table table-hover table-bordered text-center align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>Cliente</th>
+          <th>Data do Corte</th>
+          <th>Horário</th>
+          <th>Tipo Serviço</th>
+          <th>Status Serviço</th>
+          <th>Status Pagamento</th>
+          <th>Preço</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of usuarios">
+          <td>{{ usuario.nome }}</td>
+          <td>{{ usuario.diaParaCorte }}</td>
+          <td>{{ usuario.inicioDoCorte }}</td>
+          <td>{{ usuario.tipoServico }}</td>
+          <td>{{ usuario.statusServico }}</td>
+          <td>
+            <span
+              class="badge"
+              [ngClass]="{
+                'bg-success': usuario.statusPagamento === 'PAGO',
+                'bg-danger': usuario.statusPagamento === 'NAO_PAGO'
+              }"
+            >
+              {{ usuario.statusPagamento }}
+            </span>
+          </td>
+          <td>{{ usuario.precoBarbearia | currency: 'BRL' }}</td>
+          <td>
+            <button class="btn btn-outline-primary btn-sm">Gerar Nota</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <!-- Caso nenhum cliente seja encontrado -->
+  <ng-template #semUsuarios>
+    <div class="text-center mt-4">
+      <p class="text-muted">Nenhum cliente encontrado para o filtro selecionado.</p>
+    </div>
+  </ng-template>
+  
